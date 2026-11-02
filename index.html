@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Spartan Cooking | Receitas</title>
+<meta name="description" content="As minhas receitas, tal como as publico no Instagram. Cozinha caseira, sem complicações.">
+<style>
+  :root{
+    --bg:#14110f; --bg2:#1d1916; --card:#241f1b; --line:#3a322b;
+    --text:#f4ede4; --muted:#b9ab9b; --accent:#e0a526; --accent2:#c0392b;
+    --radius:16px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{background:var(--bg);color:var(--text);font-family:"Inter",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;line-height:1.6}
+  img{max-width:100%;display:block}
+  a{color:inherit;text-decoration:none}
+  .wrap{max-width:1160px;margin:0 auto;padding:0 20px}
+  h1,h2,h3{font-family:Georgia,"Times New Roman",serif;line-height:1.15;letter-spacing:-.01em}
+
+  /* NAV */
+  header{position:sticky;top:0;z-index:20;background:rgba(20,17,15,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:68px}
+  .logo{font-family:Georgia,serif;font-weight:700;font-size:1.35rem;letter-spacing:.02em}
+  .logo span{color:var(--accent)}
+  nav ul{display:flex;gap:26px;list-style:none;align-items:center}
+  nav a{font-size:.95rem;color:var(--muted);transition:color .15s}
+  nav a:hover{color:var(--text)}
+  .btn{display:inline-block;background:var(--accent);color:#1a1307;font-weight:600;padding:11px 22px;border-radius:999px;border:0;cursor:pointer;font-size:.95rem;transition:transform .15s,filter .15s}
+  .btn:hover{transform:translateY(-1px);filter:brightness(1.08)}
+  .btn.ghost{background:transparent;color:var(--text);border:1px solid var(--line)}
+  nav .btn{padding:8px 18px;color:#1a1307}
+
+  /* HERO */
+  .hero{padding:72px 0 28px;text-align:center}
+  .hero h1{font-size:clamp(2.2rem,6vw,4rem);margin-bottom:12px}
+  .hero h1 em{color:var(--accent);font-style:normal}
+  .hero p{color:var(--muted);max-width:560px;margin:0 auto 28px}
+  .search{max-width:520px;margin:0 auto 22px}
+  .search input{width:100%;padding:14px 20px;border-radius:999px;border:1px solid var(--line);background:var(--bg2);color:var(--text);font-size:1rem;outline:none}
+  .search input:focus{border-color:var(--accent)}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+  .chip{padding:8px 18px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--muted);cursor:pointer;font-size:.9rem;transition:all .15s}
+  .chip:hover{color:var(--text);border-color:var(--muted)}
+  .chip.active{background:var(--accent);border-color:var(--accent);color:#1a1307;font-weight:600}
+
+  /* FEATURED */
+  .featured{margin:40px 0 20px}
+  .feat-card{display:grid;grid-template-columns:1.2fr 1fr;background:var(--card);border:1px solid var(--line);border-radius:24px;overflow:hidden;cursor:pointer;transition:border-color .2s}
+  .feat-card:hover{border-color:var(--accent)}
+  .feat-img{min-height:340px;background-size:cover;background-position:center}
+  .feat-body{padding:40px;display:flex;flex-direction:column;justify-content:center;gap:14px}
+  .tag-new{color:var(--accent2);font-weight:700;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase}
+  .feat-body h2{font-size:clamp(1.7rem,3.4vw,2.4rem)}
+  .feat-body p{color:var(--muted)}
+  .meta{display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-size:.85rem;color:var(--muted)}
+  .pill{padding:3px 12px;border-radius:999px;background:var(--bg2);border:1px solid var(--line);font-size:.78rem}
+
+  /* GRID */
+  section{padding:48px 0}
+  .sec-head{display:flex;justify-content:space-between;align-items:end;margin-bottom:26px;gap:16px;flex-wrap:wrap}
+  .sec-head h2{font-size:clamp(1.6rem,3vw,2.1rem)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:22px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;cursor:pointer;transition:transform .2s,border-color .2s;display:flex;flex-direction:column}
+  .card:hover{transform:translateY(-4px);border-color:var(--accent)}
+  .card .img{aspect-ratio:4/3;background-size:cover;background-position:center;position:relative}
+  .card .time{position:absolute;right:10px;bottom:10px;background:rgba(0,0,0,.7);padding:3px 11px;border-radius:999px;font-size:.78rem}
+  .card .body{padding:16px 18px 20px;display:flex;flex-direction:column;gap:8px}
+  .card h3{font-size:1.15rem}
+  .empty{color:var(--muted);text-align:center;padding:40px 0;display:none}
+
+  /* ABOUT */
+  .about{background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .about-grid{display:grid;grid-template-columns:380px 1fr;gap:56px;align-items:center}
+  .about-photo{aspect-ratio:4/5;border-radius:24px;background:linear-gradient(145deg,#3a2c1b,#6b2a20);display:grid;place-items:center;font-size:6rem;background-size:cover;background-position:center}
+  .about h2{font-size:clamp(1.8rem,3.4vw,2.6rem);margin-bottom:16px}
+  .about p{color:var(--muted);margin-bottom:14px}
+  .about .btns{display:flex;gap:12px;margin-top:22px;flex-wrap:wrap}
+
+  /* CTA */
+  .cta{text-align:center}
+  .cta h2{font-size:clamp(1.7rem,3.2vw,2.4rem);margin-bottom:10px}
+  .cta p{color:var(--muted);margin-bottom:22px}
+
+  footer{border-top:1px solid var(--line);padding:30px 0;color:var(--muted);font-size:.88rem}
+  .foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+
+  /* MODAL */
+  dialog{margin:auto;width:min(760px,94vw);max-height:92vh;border:1px solid var(--line);border-radius:22px;background:var(--card);color:var(--text);padding:0;overflow:auto}
+  dialog::backdrop{background:rgba(0,0,0,.7)}
+  .m-img{height:260px;background-size:cover;background-position:center}
+  .m-body{padding:28px 32px 36px}
+  .m-body h2{font-size:2rem;margin:8px 0 10px}
+  .m-body h3{font-size:1.2rem;margin:26px 0 10px;color:var(--accent)}
+  .m-body ul,.m-body ol{padding-left:22px;color:#e6dccf}
+  .m-body li{margin-bottom:8px}
+  .close{position:sticky;top:12px;float:right;margin:12px 12px 0 0;width:38px;height:38px;border-radius:50%;border:0;background:rgba(0,0,0,.65);color:#fff;font-size:1.2rem;cursor:pointer;z-index:2}
+
+  @media (max-width:860px){
+    .feat-card{grid-template-columns:1fr}
+    .feat-img{min-height:220px}
+    .feat-body{padding:26px}
+    .about-grid{grid-template-columns:1fr;gap:28px}
+    .about-photo{max-width:300px}
+    nav ul li:not(:last-child){display:none}
+    .m-body{padding:22px}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a href="#top" class="logo">Spartan <span>Cooking</span></a>
+    <nav>
+      <ul>
+        <li><a href="#receitas">Receitas</a></li>
+        <li><a href="#sobre">Sobre mim</a></li>
+        <li><a class="btn" href="https://www.instagram.com/spartan_cooking/" target="_blank" rel="noopener">Instagram</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- HERO + FILTROS -->
+  <div class="wrap hero">
+    <h1>Vamos cozinhar. <em>Bora?</em></h1>
+    <p>As receitas que vou publicando no Instagram, agora todas num só sítio.</p>
+    <div class="search"><input id="q" type="search" placeholder="Procurar receita…" aria-label="Procurar receita"></div>
+    <div class="chips" id="chips"></div>
+  </div>
+
+  <!-- NOVA RECEITA -->
+  <div class="wrap featured" id="featured"></div>
+
+  <!-- TODAS AS RECEITAS -->
+  <section id="receitas">
+    <div class="wrap">
+      <div class="sec-head"><h2 id="grid-title">Receitas</h2></div>
+      <div class="grid" id="grid"></div>
+      <p class="empty" id="empty">Nenhuma receita encontrada. Tenta outra pesquisa.</p>
+    </div>
+  </section>
+
+  <!-- SOBRE MIM -->
+  <section class="about" id="sobre">
+    <div class="wrap about-grid">
+      <div class="about-photo" id="about-photo" role="img" aria-label="Fotografia">👨‍🍳</div>
+      <div>
+        <h2>Olá, eu sou o [O teu nome]</h2>
+        <p>Escreve aqui um parágrafo sobre ti: quem és, de onde vens e o que te levou a começar a cozinhar.</p>
+        <p>Fala do teu estilo de cozinha, do tipo de receitas que costumas fazer e do que os teus seguidores podem esperar encontrar aqui.</p>
+        <div class="btns">
+          <a class="btn" href="https://www.instagram.com/spartan_cooking/" target="_blank" rel="noopener">Segue no Instagram</a>
+          <a class="btn ghost" href="#receitas">Ver receitas</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta">
+    <div class="wrap">
+      <h2>Não percas nenhuma receita</h2>
+      <p>Publico receitas novas no Instagram. Segue para ver em primeira mão.</p>
+      <a class="btn" href="https://www.instagram.com/spartan_cooking/" target="_blank" rel="noopener">@spartan_cooking</a>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <span>© <span id="year"></span> Spartan Cooking. Todos os direitos reservados.</span>
+    <a href="https://www.instagram.com/spartan_cooking/" target="_blank" rel="noopener">Instagram</a>
+  </div>
+</footer>
+
+<dialog id="modal"></dialog>
+
+<script>
+/* =====================================================================
+   COMO ADICIONAR UMA RECEITA NOVA
+   Copia um bloco { ... } da lista abaixo, cola no TOPO da lista e edita.
+   - imagem: link de uma foto (ou deixa "" para usar um fundo com emoji).
+     Se pões as fotos na mesma pasta do site, usa por exemplo "fotos/bife.jpg".
+   - instagram: link do post (opcional). Deixa "" se não quiseres.
+   - A primeira receita da lista aparece como "Nova receita" em destaque.
+   ===================================================================== */
+const SOBRE_FOTO = ""; // ex: "fotos/eu.jpg" (deixa vazio para mostrar o emoji)
+
+const RECEITAS = [
+  {
+    titulo: "Bife à Spartan (receita de exemplo)",
+    descricao: "Bife suculento, selado em lume forte e acabado com manteiga e alho.",
+    categorias: ["Pratos Principais"],
+    tempo: "25 min",
+    emoji: "🥩",
+    imagem: "",
+    instagram: "https://www.instagram.com/spartan_cooking/",
+    ingredientes: ["2 bifes de vaca (cerca de 250 g cada)", "2 colheres de sopa de azeite", "2 colheres de sopa de manteiga", "3 dentes de alho", "Sal e pimenta a gosto"],
+    passos: ["Tira os bifes do frigorífico 20 minutos antes e tempera com sal e pimenta.", "Aquece bem uma frigideira com azeite e sela os bifes 2 a 3 minutos de cada lado.", "Junta a manteiga e o alho e vai regando os bifes durante 1 minuto.", "Deixa descansar 5 minutos antes de cortar."]
+  },
+  {
+    titulo: "Panquecas Fofas (receita de exemplo)",
+    descricao: "As panquecas mais fofas para um pequeno-almoço de domingo.",
+    categorias: ["Pequeno-almoço", "Doces"],
+    tempo: "20 min",
+    emoji: "🥞",
+    imagem: "",
+    instagram: "",
+    ingredientes: ["200 g de farinha", "1 colher de sopa de açúcar", "2 colheres de chá de fermento", "1 ovo", "250 ml de leite", "Manteiga para a frigideira"],
+    passos: ["Mistura os ingredientes secos.", "Junta o ovo e o leite e mexe só até incorporar.", "Cozinha em lume médio até surgirem bolhas, vira e deixa dourar."]
+  },
+  {
+    titulo: "Hambúrguer Smash (receita de exemplo)",
+    descricao: "Carne esmagada na chapa para uma crosta crocante e muito sabor.",
+    categorias: ["Sandes & Hambúrgueres"],
+    tempo: "15 min",
+    emoji: "🍔",
+    imagem: "",
+    instagram: "",
+    ingredientes: ["300 g de carne picada de vaca", "4 pães de hambúrguer", "4 fatias de queijo", "Cebola, pickles e molho a gosto"],
+    passos: ["Faz bolas de carne de 75 g.", "Esmaga-as numa frigideira muito quente e tempera.", "Vira ao fim de 1 minuto, junta o queijo e monta nos pães tostados."]
+  },
+  {
+    titulo: "Batatas Crocantes (receita de exemplo)",
+    descricao: "Batatas no forno, douradas por fora e macias por dentro.",
+    categorias: ["Snacks & Acompanhamentos"],
+    tempo: "50 min",
+    emoji: "🥔",
+    imagem: "",
+    instagram: "",
+    ingredientes: ["1 kg de batatas", "4 colheres de sopa de azeite", "Alho em pó, sal e alecrim"],
+    passos: ["Corta as batatas e coze-as 8 minutos em água com sal.", "Escorre, mexe para criar arestas e tempera com azeite.", "Assa a 220 °C durante 35 a 40 minutos, virando a meio."]
+  }
+];
+
+/* ===================== CÓDIGO DO SITE (não precisas de mexer) ===================== */
+const GRADS = ["#5b2a1c,#c0662b","#1f3a2c,#6aa05b","#3a2c1b,#e0a526","#2b2340,#a1558f","#4a1f1f,#d2693c"];
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+let categoriaAtual = "Todas";
+
+function fundo(r, i){
+  if (r.imagem) return `background-image:url('${esc(r.imagem)}')`;
+  return `background-image:linear-gradient(145deg,${GRADS[i % GRADS.length]})`;
+}
+function emojiBlock(r){ return r.imagem ? "" : `<div style="height:100%;display:grid;place-items:center;font-size:4rem">${esc(r.emoji||"🍽️")}</div>`; }
+
+function chips(){
+  const cats = ["Todas", ...new Set(RECEITAS.flatMap(r => r.categorias))];
+  $("#chips").innerHTML = cats.map(c => `<button class="chip ${c===categoriaAtual?"active":""}" data-c="${esc(c)}">${esc(c)}</button>`).join("");
+}
+function destaque(){
+  const r = RECEITAS[0]; if(!r) return;
+  $("#featured").innerHTML = `
+    <div class="feat-card" data-i="0">
+      <div class="feat-img" style="${fundo(r,0)}">${emojiBlock(r)}</div>
+      <div class="feat-body">
+        <span class="tag-new">Nova receita</span>
+        <h2>${esc(r.titulo)}</h2>
+        <p>${esc(r.descricao)}</p>
+        <div class="meta">${r.categorias.map(c=>`<span class="pill">${esc(c)}</span>`).join("")}<span>⏱ ${esc(r.tempo)}</span></div>
+      </div>
+    </div>`;
+}
+function lista(){
+  const q = $("#q").value.trim().toLowerCase();
+  const itens = RECEITAS.map((r,i)=>({r,i})).filter(({r}) =>
+    (categoriaAtual==="Todas" || r.categorias.includes(categoriaAtual)) &&
+    (!q || (r.titulo+" "+r.descricao+" "+r.ingredientes.join(" ")).toLowerCase().includes(q)));
+  $("#grid-title").textContent = categoriaAtual==="Todas" ? "Todas as receitas" : categoriaAtual;
+  $("#grid").innerHTML = itens.map(({r,i}) => `
+    <article class="card" data-i="${i}">
+      <div class="img" style="${fundo(r,i)}">${emojiBlock(r)}<span class="time">⏱ ${esc(r.tempo)}</span></div>
+      <div class="body">
+        <div class="meta">${r.categorias.map(c=>`<span class="pill">${esc(c)}</span>`).join("")}</div>
+        <h3>${esc(r.titulo)}</h3>
+      </div>
+    </article>`).join("");
+  $("#empty").style.display = itens.length ? "none" : "block";
+}
+function abrir(i){
+  const r = RECEITAS[i];
+  $("#modal").innerHTML = `
+    <button class="close" aria-label="Fechar" onclick="document.getElementById('modal').close()">✕</button>
+    <div class="m-img" style="${fundo(r,i)}">${emojiBlock(r)}</div>
+    <div class="m-body">
+      <div class="meta">${r.categorias.map(c=>`<span class="pill">${esc(c)}</span>`).join("")}<span>⏱ ${esc(r.tempo)}</span></div>
+      <h2>${esc(r.titulo)}</h2>
+      <p style="color:var(--muted)">${esc(r.descricao)}</p>
+      <h3>Ingredientes</h3>
+      <ul>${r.ingredientes.map(x=>`<li>${esc(x)}</li>`).join("")}</ul>
+      <h3>Preparação</h3>
+      <ol>${r.passos.map(x=>`<li>${esc(x)}</li>`).join("")}</ol>
+      ${r.instagram ? `<p style="margin-top:28px"><a class="btn" href="${esc(r.instagram)}" target="_blank" rel="noopener">Ver no Instagram</a></p>` : ""}
+    </div>`;
+  $("#modal").showModal();
+}
+
+document.addEventListener("click", e => {
+  const chip = e.target.closest(".chip");
+  if (chip){ categoriaAtual = chip.dataset.c; chips(); lista(); return; }
+  const card = e.target.closest("[data-i]");
+  if (card) abrir(+card.dataset.i);
+  if (e.target === $("#modal")) $("#modal").close();
+});
+$("#q").addEventListener("input", lista);
+if (SOBRE_FOTO){ const p=$("#about-photo"); p.style.backgroundImage=`url('${SOBRE_FOTO}')`; p.textContent=""; }
+$("#year").textContent = new Date().getFullYear();
+chips(); destaque(); lista();
+</script>
+</body>
+</html>
