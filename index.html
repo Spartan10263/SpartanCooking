@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Spartan Cooking | Receitas</title>
+<title>Spartan Cooking</title>
 <meta name="description" content="As minhas receitas, tal como as publico no Instagram. Cozinha caseira, sem complicações.">
 <style>
   :root{
@@ -46,11 +46,12 @@
   .chip.active{background:var(--accent);border-color:var(--accent);color:#1a1307;font-weight:600}
 
   /* FEATURED */
-  .featured{margin:40px 0 20px}
+  .featured{margin:40px auto 20px}
   .feat-card{display:grid;grid-template-columns:1.2fr 1fr;background:var(--card);border:1px solid var(--line);border-radius:24px;overflow:hidden;cursor:pointer;transition:border-color .2s}
   .feat-card:hover{border-color:var(--accent)}
   .feat-img{min-height:340px;background-size:cover;background-position:center}
-  .feat-body{padding:40px;display:flex;flex-direction:column;justify-content:center;gap:14px}
+  .feat-body{padding:40px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:14px}
+  .feat-body .meta{justify-content:center}
   .tag-new{color:var(--accent2);font-weight:700;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase}
   .feat-body h2{font-size:clamp(1.7rem,3.4vw,2.4rem)}
   .feat-body p{color:var(--muted)}
@@ -115,8 +116,8 @@
     <a href="#top" class="logo">Spartan <span>Cooking</span></a>
     <nav>
       <ul>
-        <li><a href="#receitas">Receitas</a></li>
-        <li><a href="#sobre">Sobre mim</a></li>
+        <li><a href="#receitas">Recipes</a></li>
+        <li><a href="#sobre">About Me</a></li>
         <li><a class="btn" href="https://www.instagram.com/spartan_cooking/" target="_blank" rel="noopener">Instagram</a></li>
       </ul>
     </nav>
@@ -184,8 +185,10 @@
 /* =====================================================================
    COMO ADICIONAR UMA RECEITA NOVA
    Copia um bloco { ... } da lista abaixo, cola no TOPO da lista e edita.
-   - imagem: link de uma foto (ou deixa "" para usar um fundo com emoji).
-     Se pões as fotos na mesma pasta do site, usa por exemplo "fotos/bife.jpg".
+   - imagem: caminho da foto. Cria uma pasta "fotos" ao lado do index.html,
+     põe lá a foto e escreve o caminho, por exemplo "fotos/bife.jpg".
+     (Também funciona com um link da internet. Se o ficheiro não existir
+     ou deixares "", aparece um fundo colorido.)
    - instagram: link do post (opcional). Deixa "" se não quiseres.
    - A primeira receita da lista aparece como "Nova receita" em destaque.
    ===================================================================== */
@@ -193,34 +196,31 @@ const SOBRE_FOTO = ""; // ex: "fotos/eu.jpg" (deixa vazio para mostrar o emoji)
 
 const RECEITAS = [
   {
-    titulo: "Bife à Spartan (receita de exemplo)",
-    descricao: "Bife suculento, selado em lume forte e acabado com manteiga e alho.",
-    categorias: ["Pratos Principais"],
-    tempo: "25 min",
-    emoji: "🥩",
-    imagem: "",
-    instagram: "https://www.instagram.com/spartan_cooking/",
-    ingredientes: ["2 bifes de vaca (cerca de 250 g cada)", "2 colheres de sopa de azeite", "2 colheres de sopa de manteiga", "3 dentes de alho", "Sal e pimenta a gosto"],
-    passos: ["Tira os bifes do frigorífico 20 minutos antes e tempera com sal e pimenta.", "Aquece bem uma frigideira com azeite e sela os bifes 2 a 3 minutos de cada lado.", "Junta a manteiga e o alho e vai regando os bifes durante 1 minuto.", "Deixa descansar 5 minutos antes de cortar."]
+    titulo: "Cinnamon Rolls",
+    descricao: "Recipe for soft and fluffy cinnamon rolls",
+    categorias: ["Sweets"],
+    tempo: "2 h",
+    imagem: "img/cinnamon_rolls.jpg",
+    instagram: "https://www.instagram.com/p/DfNYJCRgvW2",
+    ingredientes: ["190ml of milk", "100g of butter", "125g of sugar", "30g of dry yeast", "400g of flour", "1 egg", "3-4 tablespoons of cinnamon", "80 ml of heavy cream", "50g cream cheese", "80g of powdered sugar"],
+    passos: ["Melt the milk, half of the butter and and 50g of sugar in a saucepan. Let it cool slightly and add the yeast. Cover with a cloth and let it rest for 10 minutes.","Add the flour and the egg and knead until you have a somewhat smooth dough. Cover with a cloth and let it rest for 1 hour.","Make the cinnamon filling by mixing the remaining sugar, cinnamon and the remaining butter.","Roll out the dough into a rectangle, to the thickness of a finger and spread the filling evenly over the dough. Cut the dough into 10-12 strips and roll them up.","Grease a baking dish with butter and cover it with parchment paper, then place the rolls in the dish. Cover with a cloth and let it rest for 20 minutes.","Pour 40 ml of heavy cream over the rolls and bake at 180°C for 20-25 minutes, and if needed turn on the broiler at 200°C until golden brown.", "Make the glaze by mixing the remaining heavy cream, cream cheese and powdered sugar and drizzle over the rolls."]
   },
   {
-    titulo: "Panquecas Fofas (receita de exemplo)",
-    descricao: "As panquecas mais fofas para um pequeno-almoço de domingo.",
-    categorias: ["Pequeno-almoço", "Doces"],
-    tempo: "20 min",
-    emoji: "🥞",
-    imagem: "",
-    instagram: "",
-    ingredientes: ["200 g de farinha", "1 colher de sopa de açúcar", "2 colheres de chá de fermento", "1 ovo", "250 ml de leite", "Manteiga para a frigideira"],
-    passos: ["Mistura os ingredientes secos.", "Junta o ovo e o leite e mexe só até incorporar.", "Cozinha em lume médio até surgirem bolhas, vira e deixa dourar."]
+    titulo: "Gordon Bleu with mushroom sauce",
+    descricao: "Chicken breast stuffed with ham and cheese, served with a creamy mushroom sauce and rice (3-4 people)",
+    categorias: ["Chicken", "Rice"],
+    tempo: "1 h 30 min",
+    imagem: "img/gordon_bleu.jpg",
+    instagram: "https://www.instagram.com/p/DfIfN-qiCyM/",
+    ingredientes: ["8 chicken cutlets", "8 slices of ham", "8 slices of cheese", "2-3 eggs", "100-150g of flour", "100-150g of breadcrumbs", "Salt and pepper to taste", "200g of mushrooms", "1 large onion", "4-5 cloves of garlic", "a handful of parsley", "1 chili pepper(opcional)", "tomato paste", "200-300ml of white wine", "50g of butter", "50g of flour", "olive oil", "vegetal oil(or any neutral oil)"],
+    passos: ["Start by preparing the chicken cutlets. Put plastic wrap over a cutting board and one chicken cutlet on top.", "Using a meat mallet, gently pound each cutlet to an even thickness.", "Then put a slice of ham and cheese on top of the chicken cutlet on the side thats farthest from you.", "Fold the sides of the chicken cutlet and start rolling it from the side thats farthest from you tucking the ham and cheese inside. Wrap it tightly with the plastic wrap.", "Do the same with the rest and then put them in the fridge for at least 3 hours (overnight is even better).", "Season the chicken rolls with salt and pepper to taste. Dredge them in flour, dip in beaten eggs, and coat with breadcrumbs.", "Heat oil in a pan over medium high heat and deep fry the chicken rolls until golden brown on all sides.", "While you are frying the chicken rolls, heat a pan with olive oil over medium high heat and cook the mushrooms until all the moisture has evaporated, and toast them a little and season them with salt and pepper to taste.", "Then add 3/4 of the onion (diced) and sauté until softened, add the garlic (minced) and the chilli pepper (minced) and a little bit of tomato paste.", "Add the butter and flour and let it cook mixing constantly for a few minutes.", "Deglaze the pan with white wine and let it simmer for 20-30 minutes (add more wine if needed). Season with salt, pepper, and chopped parsley.", "Serve the chicken rolls with the mushroom sauce and rice."]
   },
   {
     titulo: "Hambúrguer Smash (receita de exemplo)",
     descricao: "Carne esmagada na chapa para uma crosta crocante e muito sabor.",
-    categorias: ["Sandes & Hambúrgueres"],
+    categorias: [""],
     tempo: "15 min",
-    emoji: "🍔",
-    imagem: "",
+    imagem: "fotos/hamburguer.jpg",
     instagram: "",
     ingredientes: ["300 g de carne picada de vaca", "4 pães de hambúrguer", "4 fatias de queijo", "Cebola, pickles e molho a gosto"],
     passos: ["Faz bolas de carne de 75 g.", "Esmaga-as numa frigideira muito quente e tempera.", "Vira ao fim de 1 minuto, junta o queijo e monta nos pães tostados."]
@@ -228,10 +228,9 @@ const RECEITAS = [
   {
     titulo: "Batatas Crocantes (receita de exemplo)",
     descricao: "Batatas no forno, douradas por fora e macias por dentro.",
-    categorias: ["Snacks & Acompanhamentos"],
+    categorias: [""],
     tempo: "50 min",
-    emoji: "🥔",
-    imagem: "",
+    imagem: "fotos/batatas.jpg",
     instagram: "",
     ingredientes: ["1 kg de batatas", "4 colheres de sopa de azeite", "Alho em pó, sal e alecrim"],
     passos: ["Corta as batatas e coze-as 8 minutos em água com sal.", "Escorre, mexe para criar arestas e tempera com azeite.", "Assa a 220 °C durante 35 a 40 minutos, virando a meio."]
@@ -244,11 +243,11 @@ const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 let categoriaAtual = "Todas";
 
+/* Usa a foto da receita; se o ficheiro não existir (ou o campo estiver vazio), mostra um fundo colorido */
 function fundo(r, i){
-  if (r.imagem) return `background-image:url('${esc(r.imagem)}')`;
-  return `background-image:linear-gradient(145deg,${GRADS[i % GRADS.length]})`;
+  const grad = `linear-gradient(145deg,${GRADS[i % GRADS.length]})`;
+  return r.imagem ? `background-image:url('${esc(r.imagem)}'),${grad}` : `background-image:${grad}`;
 }
-function emojiBlock(r){ return r.imagem ? "" : `<div style="height:100%;display:grid;place-items:center;font-size:4rem">${esc(r.emoji||"🍽️")}</div>`; }
 
 function chips(){
   const cats = ["Todas", ...new Set(RECEITAS.flatMap(r => r.categorias))];
@@ -258,7 +257,7 @@ function destaque(){
   const r = RECEITAS[0]; if(!r) return;
   $("#featured").innerHTML = `
     <div class="feat-card" data-i="0">
-      <div class="feat-img" style="${fundo(r,0)}">${emojiBlock(r)}</div>
+      <div class="feat-img" style="${fundo(r,0)}"></div>
       <div class="feat-body">
         <span class="tag-new">Nova receita</span>
         <h2>${esc(r.titulo)}</h2>
@@ -275,7 +274,7 @@ function lista(){
   $("#grid-title").textContent = categoriaAtual==="Todas" ? "Todas as receitas" : categoriaAtual;
   $("#grid").innerHTML = itens.map(({r,i}) => `
     <article class="card" data-i="${i}">
-      <div class="img" style="${fundo(r,i)}">${emojiBlock(r)}<span class="time">⏱ ${esc(r.tempo)}</span></div>
+      <div class="img" style="${fundo(r,i)}"><span class="time">⏱ ${esc(r.tempo)}</span></div>
       <div class="body">
         <div class="meta">${r.categorias.map(c=>`<span class="pill">${esc(c)}</span>`).join("")}</div>
         <h3>${esc(r.titulo)}</h3>
@@ -287,7 +286,7 @@ function abrir(i){
   const r = RECEITAS[i];
   $("#modal").innerHTML = `
     <button class="close" aria-label="Fechar" onclick="document.getElementById('modal').close()">✕</button>
-    <div class="m-img" style="${fundo(r,i)}">${emojiBlock(r)}</div>
+    <div class="m-img" style="${fundo(r,i)}"></div>
     <div class="m-body">
       <div class="meta">${r.categorias.map(c=>`<span class="pill">${esc(c)}</span>`).join("")}<span>⏱ ${esc(r.tempo)}</span></div>
       <h2>${esc(r.titulo)}</h2>
